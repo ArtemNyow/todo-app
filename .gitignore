@@ -141,3 +141,75 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+
+# Visual Studio / .NET
+.vs/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build Folders
+[Bb]in/
+[Oo]bj/
+out/
+**/bin/
+**/obj/
+
+# NuGet
+*.nupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Rider
+.idea/
+*.sln.iml
+
+# Dotnet tools
+.dotnet/tools/
+
+# ASP.NET
+wwwroot/lib/
+
+# Launch settings
+**/Properties/launchSettings.json
+
+# User secrets (local dev)
+secrets.json
+secrets.*.json
+
+# Test results
+TestResults/
+coverage/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+
+# Ignore publish output
+publish/
+
+# Ignore Rider workspace
+.idea/
+
+# Ignore Rider caches
+.idea/**/workspace.xml
+
+# Local application settings
+appsettings.*.Local.json
+appsettings.*.Local.*
+
+# Sensitive keys
+*.pem
+*.key
+*.p12
+
+# Ensure not to accidentally commit sensitive files
+
