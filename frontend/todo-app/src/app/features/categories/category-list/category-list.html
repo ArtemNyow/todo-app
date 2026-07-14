@@ -1,0 +1,55 @@
+<div class="page-container-narrow">
+  <a routerLink="/tasks" class="back-link">← До задач</a>
+
+  <div class="card">
+    <h2 class="mb-3">Категорії</h2>
+
+    <div class="add-form">
+      <input
+        type="text"
+        placeholder="Назва нової категорії"
+        [(ngModel)]="newCategoryName"
+        (keyup.enter)="onAdd()"
+      />
+      <button (click)="onAdd()" class="btn btn-primary">Додати</button>
+    </div>
+
+    <div class="alert alert-danger" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+    <div *ngIf="isLoading">Завантаження...</div>
+
+    <div *ngIf="!isLoading && categories.length === 0" class="text-center">
+      Категорій поки немає.
+    </div>
+
+    <ul *ngIf="!isLoading && categories.length > 0" class="category-list">
+      <li *ngFor="let category of categories" class="category-item">
+        <ng-container *ngIf="editingId !== category.id">
+          <span class="category-name">
+            {{ category.name }}
+            <span class="task-count">({{ category.taskCount }} задач)</span>
+          </span>
+          <div class="category-actions">
+            <button (click)="startEdit(category)" class="btn btn-secondary btn-sm">
+              Редагувати
+            </button>
+            <button (click)="onDelete(category.id)" class="btn btn-danger btn-sm">Видалити</button>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="editingId === category.id">
+          <input
+            type="text"
+            [(ngModel)]="editingName"
+            (keyup.enter)="saveEdit(category.id)"
+            class="edit-input"
+          />
+          <div class="category-actions">
+            <button (click)="saveEdit(category.id)" class="btn btn-primary btn-sm">Зберегти</button>
+            <button (click)="cancelEdit()" class="btn btn-secondary btn-sm">Скасувати</button>
+          </div>
+        </ng-container>
+      </li>
+    </ul>
+  </div>
+</div>

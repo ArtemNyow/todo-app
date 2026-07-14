@@ -4,6 +4,7 @@ import { RegisterComponent } from './features/register/register';
 import { TaskListComponent } from './features/tasks/task-list/task-list';
 import { TaskFormComponent } from './features/tasks/task-form/task-form';
 import { authGuard } from './core/guards/auth-guard';
+import { CategoryListComponent } from './features/categories/category-list/category-list';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -11,5 +12,6 @@ export const routes: Routes = [
   { path: 'tasks', component: TaskListComponent, canActivate: [authGuard] },
   { path: 'tasks/new', component: TaskFormComponent, canActivate: [authGuard] },
   { path: 'tasks/edit/:id', component: TaskFormComponent, canActivate: [authGuard] },
+  { path: 'categories', component: CategoryListComponent, canActivate: [authGuard] },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
