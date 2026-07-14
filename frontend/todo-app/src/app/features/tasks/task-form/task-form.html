@@ -1,0 +1,50 @@
+<div class="page-container-narrow">
+  <div class="card">
+    <h2 class="mb-3">{{ isEditMode ? 'Редагувати задачу' : 'Нова задача' }}</h2>
+
+    <div *ngIf="isLoading">Завантаження...</div>
+
+    <form *ngIf="!isLoading" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="title">Назва</label>
+        <input type="text" id="title" name="title" [(ngModel)]="title" required />
+      </div>
+
+      <div class="form-group">
+        <label for="description">Опис</label>
+        <textarea id="description" name="description" [(ngModel)]="description" rows="3"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="dueDate">Дедлайн</label>
+        <input type="date" id="dueDate" name="dueDate" [(ngModel)]="dueDate" />
+      </div>
+
+      <div class="form-group">
+        <label for="category">Категорія</label>
+        <select id="category" name="category" [(ngModel)]="categoryId">
+          <option [ngValue]="null">Без категорії</option>
+          <option *ngFor="let cat of categories" [ngValue]="cat.id">
+            {{ cat.name }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group checkbox-group" *ngIf="isEditMode">
+        <label class="checkbox-label">
+          <input type="checkbox" name="isCompleted" [(ngModel)]="isCompleted" />
+          Виконано
+        </label>
+      </div>
+
+      <div class="alert alert-danger" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+      <div class="form-actions">
+        <button type="button" (click)="onCancel()" class="btn btn-secondary">Скасувати</button>
+        <button type="submit" class="btn btn-primary">
+          {{ isEditMode ? 'Зберегти' : 'Створити' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

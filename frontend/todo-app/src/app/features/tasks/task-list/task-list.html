@@ -1,0 +1,37 @@
+<div class="page-container">
+  <div class="header">
+    <h2>Мої задачі</h2>
+    <div class="header-actions">
+      <a routerLink="/tasks/new" class="btn btn-success">+ Нова задача</a>
+      <button (click)="onLogout()" class="btn btn-danger">Вийти</button>
+    </div>
+  </div>
+
+  <div *ngIf="isLoading">Завантаження...</div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+  <div *ngIf="!isLoading && tasks.length === 0 && !errorMessage" class="card text-center">
+    Задач поки немає.
+  </div>
+
+  <ul *ngIf="!isLoading && tasks.length > 0" class="task-list">
+    <li *ngFor="let task of tasks" class="task-item card">
+      <div class="task-info">
+        <div class="task-title" [class.completed]="task.isCompleted">
+          {{ task.title }}
+        </div>
+        <div class="task-meta">
+          <span *ngIf="task.categoryName" class="badge">{{ task.categoryName }}</span>
+          <span *ngIf="task.dueDate" class="badge">{{ task.dueDate | date: 'dd.MM.yyyy' }}</span>
+        </div>
+      </div>
+      <div class="task-actions">
+        <a [routerLink]="['/tasks/edit', task.id]" class="btn btn-secondary">Редагувати</a>
+        <button (click)="onDelete(task.id, $event)" class="btn btn-danger">Видалити</button>
+      </div>
+    </li>
+  </ul>
+
+  <div class="pagination-info" *ngIf="totalCount > 0">Всього задач: {{ totalCount }}</div>
+</div>
